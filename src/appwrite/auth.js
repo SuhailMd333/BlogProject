@@ -1,6 +1,6 @@
 import { Client, Account, ID } from "appwrite";
 import confg from "../confg/confg";
-export class Authservice {
+ export class Authservice {
   client = new Client();
   account;
   constructor() {

@@ -1,5 +1,5 @@
-import React from 'react'
-import {Postform,Container,} from '../components' 
+
+import {Postform,Container} from '../components' 
 const AddPost = () => {
   return (
     <div className='py-8'>

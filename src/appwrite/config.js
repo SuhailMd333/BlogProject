@@ -1,6 +1,6 @@
 import { Client,ID,Storage,Databases } from "appwrite";
 import confg from "../confg/confg"
-export class Service{
+ export class Service{
     client = new Client()
     databases;
     bucket;
@@ -68,13 +68,15 @@ export class Service{
 
     async getAllPost(){
         try {
-            return await this.databases.listDocuments(confg.appWriteDatabaseId,confg.appWriteCollectionId)
-        } catch (error) {
-            console.log(error)
-        }
-        //crud of databases
+            return await this.databases.listDocuments(
+                confg.appWriteDatabaseId,
+                confg.appWriteCollectionId
 
-       
+            )
+        } catch (error) {
+            console.log("Appwrite serive :: getPosts :: error", error);
+            return false
+        }
     }
 
     //storage crud functions
@@ -103,12 +105,12 @@ export class Service{
     }
     getFilePreview(fileId){
         return this.bucket.getFilePreview(
-            confg.appwriteBucketId,
+            confg.appWriteBucketId,
             fileId
         )
     }
 }
 
 const service = new Service();
-
+// console.log(service.getAllPost())
 export default service;

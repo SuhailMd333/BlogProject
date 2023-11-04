@@ -21,11 +21,12 @@ const Login = () => {
         const user = await authService.getCurrentUser();
         if (user) {
           dispatch(authLogin(user));
-          navigate("/");
+         
         }
+        navigate("/");
       }
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
 

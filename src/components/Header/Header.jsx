@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom"
-import {LogoutBtn,Logo} from "../index"
+import {LogoutBtn,Logo,} from "../index"
 import { useSelector} from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { Container } from "postcss"
+// import { useNavigate } from "react-router-dom"
+
 
 const Header = () => {
 const authStatus = useSelector((state) => state.userStatus)
-const navigate = useNavigate()
+console.log(authStatus)
+// const navigate = useNavigate()
 
 const navItems = [
   {
@@ -38,7 +39,7 @@ const navItems = [
   return (
     <div>
       <header className='py-3 shadow bg-gray-500'>
-      <Container>
+      {/* <Container> */}
         <nav className='flex'>
           <div className='mr-4'>
             <Link to='/'>
@@ -48,16 +49,17 @@ const navItems = [
           </div>
           <ul className='flex ml-auto'>
 
-          {navItems.map((item) => 
+          {
+          navItems.map((item) => 
             item.active ? (
               <li key={item.name}>
-                <button
-                onClick={() => navigate(item.slug)}
-                className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
-                >{item.name}</button>
+                <Link to={item.slug}    className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'>
+                {item.name}
+                </Link>
               </li>
             ) : null
-            )}
+            )
+            }
             {authStatus && (
               <li>
                 <LogoutBtn />
@@ -65,7 +67,7 @@ const navItems = [
             )}
           </ul>
           </nav>
-          </Container>
+          {/* </Container> */}
           </header>
     </div>
   )

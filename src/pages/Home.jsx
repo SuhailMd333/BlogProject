@@ -1,16 +1,21 @@
+import { useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from "react";
 import service from "../appwrite/config";
-import { Container, Postcard } from "../components";
+import {  Postcard } from "../components";
+
 const Home = () => {
   const errorRef = useRef(null);
-
+  const authStatus = useSelector((state) => state.userStatus)
   const [post, setPost] = useState([]);
+  // console.log(post.length)
   useEffect(() => {
     service
       .getAllPost()
       .then((post) => {
         if (post) {
+        
           setPost(post.documents);
+          
         }
       })
       .catch((err) => {
@@ -20,7 +25,7 @@ const Home = () => {
         }
       });
   }, []);
-  if (post === 0) {
+  if (post.length === 0) {
     return (
       <div className="w-full py-8 mt-4 text-center">
         <div className="p-2 w-full">
@@ -34,7 +39,7 @@ const Home = () => {
 
   return (
     <div className="w-full py-8">
-      <Container>
+      {/* <Container> */}
         <div className="flex flex-wrap">
           {post.map((post) => (
             <div className="p-2 w-1/4 " key={post.$id}>
@@ -42,7 +47,7 @@ const Home = () => {
             </div>
           ))}
         </div>
-      </Container>
+      {/* </Container> */}
     </div>
   );
 };

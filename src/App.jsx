@@ -1,34 +1,37 @@
 import { useState,useEffect } from "react"
 import { useDispatch } from "react-redux"
-import authService from "./appwrite/auth"
+import service from "./appwrite/auth"
 import {login,logout} from "./store/authSlice"
 import {Header,Footer} from "./components/index"
 import { Outlet } from "react-router-dom"
 const App = () => {
 
-  const [loading,setLoading] = useState(false);
+  const [loading,setLoading] = useState(true);
   const dispatch = useDispatch();
   
-console.log(authService)
+console.log(service)
   useEffect(() => {
      
-    authService.getCurrentUser()
+    service.getCurrentUser()
     .then((userData) => {
       if(userData){
         dispatch(login({userData}))
       
       } else{
-        logout()
+        dispatch(logout())
       }
     })
     .catch((e) => console.log(e,"suhail"))
-    .finally(() => setLoading(false))
+    .finally(() => {
+      setLoading(false)
+      console.log("finally")
+    })
     
 
   },[])
 
 
- !loading? (
+  return !loading ? (
   <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
   <div className='w-full block'>
 
@@ -41,6 +44,6 @@ console.log(authService)
 
     </div>
     </div>
- ) :null
+ ) : <div>Loading...</div>
   }
 export default App

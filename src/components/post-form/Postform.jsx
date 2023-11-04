@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import service from "../../appwrite/config";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
-export  const Postform = ({ post }) => {
+export  const Postform = ({ post={} }) => {
   const navigate = useNavigate();
   const { register, handleSubmit, control, watch, setValue, getValues } =
     useForm({
@@ -16,7 +16,7 @@ export  const Postform = ({ post }) => {
       },
     });
 
-  const { userData } = useSelector((state) => state.useData);
+  const { userData } = useSelector((state) => state.userData);
   const submit = async (data) => {
     if (post) {
      const file = data.image[0] ? service.uploadFile(data.image[0]) : null;
