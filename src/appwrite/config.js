@@ -1,18 +1,20 @@
-import { Client,ID,Storage,Databases } from "appwrite";
+import { Client,Databases } from "appwrite";
+import { Storage } from "appwrite";
 import confg from "../confg/confg"
- export class Service{
-    client = new Client()
-    databases;
-    bucket;
+ export class Service {
+    client = new Client();
+    databases
+    storage
     constructer(){
-        this.client
-      .setEndpoint(confg.appWriteUrl)
-      .setProject(confg.appWriteprojectId);
+        this.client.setEndpoint('https://cloud.appwrite.io/v1').setProject("652cdde78fa4958d6aa2")
       this.databases = new Databases(this.client)
-      this.bucket = new Storage(this.client)
+      this.storage = new Storage(this.client)
     }
  // these all methods are responsible for crud operation in database
     async createPost({title,slug,content,featuredImage,status,userId}){
+        if(!this.client){
+            console.log("database is not initialized correctly")
+        }
         try {
          return   await this.databases.createDocument(confg.appWriteDatabaseId,
                 confg.appWriteCollectionId,
@@ -68,6 +70,7 @@ import confg from "../confg/confg"
 
     async getAllPost(){
         try {
+            console.log(confg.appWriteBucketId,"",confg.appWriteDatabaseId)
             return await this.databases.listDocuments(
                 confg.appWriteDatabaseId,
                 confg.appWriteCollectionId
@@ -81,17 +84,30 @@ import confg from "../confg/confg"
 
     //storage crud functions
 
-     async uploadFile(file){
-        try {
-            return await this.bucket.createFile(
-                confg.appWriteBucketId,
-                ID.unique(),
-                file
-            )
-        } catch (error) {
-            console.log(error)
-        }
-    }
+//      async uploadFile(file){
+// console.log( this.storage)
+//         if(!this.storage){
+//             console.log("The Bucket is not initialized correctly");
+//             return null;
+//         }
+//         console.log(file)
+       
+//         try {
+            
+//          let uploadStatus = await this.storage.createFile(
+//                 confg.appWriteBucketId,
+//                 ID.unique(),
+//                 file
+//             )
+//             return uploadStatus 
+//             }
+//          catch (error) {
+//             console.log(error)
+//             throw error
+         
+//         }
+       
+//     }
 
     async deletefile(fileId){
         try {
@@ -104,8 +120,7 @@ import confg from "../confg/confg"
         }
     }
     getFilePreview(fileId){
-        return this.bucket.getFilePreview(
-            confg.appWriteBucketId,
+        return this.storage.getFilePreview(confg.appWriteBucketId,
             fileId
         )
     }

@@ -2,12 +2,12 @@ import { Link } from "react-router-dom"
 import {LogoutBtn,Logo,} from "../index"
 import { useSelector} from "react-redux"
 // import { useNavigate } from "react-router-dom"
+import { Container } from "../index"
 
 
 const Header = () => {
 const authStatus = useSelector((state) => state.userStatus)
-console.log(authStatus)
-// const navigate = useNavigate()
+
 
 const navItems = [
   {
@@ -39,7 +39,7 @@ const navItems = [
   return (
     <div>
       <header className='py-3 shadow bg-gray-500'>
-      {/* <Container> */}
+      <Container>
         <nav className='flex'>
           <div className='mr-4'>
             <Link to='/'>
@@ -67,7 +67,7 @@ const navItems = [
             )}
           </ul>
           </nav>
-          {/* </Container> */}
+          </Container>
           </header>
     </div>
   )

@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { Editor } from '@tinymce/tinymce-react'
 import { Controller } from 'react-hook-form'
 
-const RTE = ({name,control,label,defaultvalue=""}) => {
+const RTE = ({name,control,label,defaultValue=""}) => {
+  console.log(defaultValue)
   return (
     <div 
     className='w-full'>
@@ -11,11 +13,11 @@ const RTE = ({name,control,label,defaultvalue=""}) => {
         <Controller
         name={name || " Content"}
         control={control}
-        render={({field:{onchange}}) => (
+        render={({field:{onChange}}) => (
             <Editor
-            initialValue={defaultvalue}
+            initialValue={defaultValue}
             init={{
-                initialValue:defaultvalue,
+                initialValue:defaultValue,
                 height:500,
                 menubar:false,
                 plugins:[
@@ -29,7 +31,7 @@ const RTE = ({name,control,label,defaultvalue=""}) => {
                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
 
             }}
-            onEditorChange={onchange}
+            onEditorChange={onChange}
             />
         )}
         />
@@ -37,4 +39,5 @@ const RTE = ({name,control,label,defaultvalue=""}) => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default RTE
