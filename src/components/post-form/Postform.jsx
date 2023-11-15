@@ -210,7 +210,7 @@ const  updatePost = async (slug,{title,content,featuredImage,status}) => {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={ post.lenght ? getFilePreview("6549d9131c234e8fc650",post?.featuredimage) : null}
+              src={ post.length !== 0  ? getFilePreview("6549d9131c234e8fc650",post?.featuredimage) : null}
               alt={post.title}
               className="rounded-lg"
             />
