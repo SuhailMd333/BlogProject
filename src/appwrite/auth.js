@@ -1,5 +1,5 @@
 import { Client, Account, ID } from "appwrite";
-import confg from "../confg/confg";
+import {confg} from "../confg/confg";
  export class Authservice {
   client = new Client();
   account;
@@ -12,6 +12,8 @@ import confg from "../confg/confg";
 
   async createAccount({ email, password, name }) {
     /*eslint no-useless-catch: "error"*/
+    console.log(confg.appWriteUrl)
+    
     try {
       const userAccount = await this.account.create(
         ID.unique(),
