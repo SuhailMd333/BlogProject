@@ -66,7 +66,7 @@ const  updatePost = async (slug,{title,content,featuredImage,status}) => {
 }
 
     // function for get the file preview 
-    if(post.lenght !== 0){
+    if(post.length !== 0){
     const getFilePreview =  (bucketId,fileId) => {
 
       console.log(fileId)
