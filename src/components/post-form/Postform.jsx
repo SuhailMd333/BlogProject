@@ -66,7 +66,7 @@ const  updatePost = async (slug,{title,content,featuredImage,status}) => {
 }
 
     // function for get the file preview 
-    if(post !== 0){
+    // if(post !== 0){
     const getFilePreview =  (bucketId,fileId) => {
 
       console.log(fileId)
@@ -75,9 +75,9 @@ const  updatePost = async (slug,{title,content,featuredImage,status}) => {
       
         return  storage.getFilePreview(bucketId,fileId);
       } catch (error) {
-        throw error
+        console.log(error)
       }
-    }
+    // }
   }
   // Function for creating a  post
   const createPost = async ({
